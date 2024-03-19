@@ -2,177 +2,349 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Video</title>
-    <style>
-        /* Styles from the first section */
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #212121; /* Dark YouTube-like background color */
-            font-family: Arial, sans-serif;
-            margin: 0; /* Added to remove default margin */
-            padding: 0; /* Added to remove default padding */
-            color: #fff; /* Set text color to white */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Music Video</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #09203F, #537895);
+      font-family: Arial, sans-serif;
+    }
 
-        /* Styles from the first section */
-        #container {
-            position: relative;
-            width: 70%;
-            margin-top: 20px;
-            background-color: #000; /* Black container background color */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Hide overflow to prevent lyrics from going outside */
-        }
+    #container {
+      position: relative;
+      width: 70%;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Styles from the first section */
-        #video-container {
-            width: 100%;
-            position: relative; /* Needed for positioning lyrics */
-        }
+    #video-container {
+      width: 100%;
+    }
 
-        /* Styles from the first section */
-        video {
-            width: 100%;
-            height: auto;
-            z-index: 1; /* Ensure video is behind lyrics */
-        }
+    video {
+      width: 100%;
+      height: auto;
+    }
 
-        /* Styles from the first section */
-        #karaoke-lyrics {
-            position: absolute;
-            bottom: 10px; /* Adjust as needed */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-            padding: 10px;
-            text-align: center;
-            font-size: 24px; /* Adjust font size as needed */
-            border-radius: 10px;
-            z-index: 2; /* Ensure lyrics are above video */
-            display: none; /* Initially hide lyrics */
-        }
+    #left-rect,
+    #right-rect {
+      width: 15%;
+      height: auto;
+      background-color: lightgray;
+      position: absolute;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      color: #333;
+    }
 
-        /* Styles from the first section */
-        .karaoke-line.active {
-            opacity: 0.5;
-            color: #007bff;
-        }
-    </style>
+    #left-rect {
+      left: -17%;
+    }
+
+    #right-rect {
+      right: -17%;
+    }
+
+    #left-label,
+    #right-label {
+      position: absolute;
+      font-weight: bold;
+      color: white;
+    }
+
+    #left-label {
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #right-label {
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #cast-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    #cast-list li {
+      font-size: 10px;
+      line-height: 1.6;
+      margin: 20px 10px;
+    }
+
+    #bottom-lyrics {
+      width: 70%;
+      max-height: 200px;
+      overflow: auto;
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+      position: relative;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .karaoke-line.active {
+      opacity: 0.5;
+      color: #007bff;
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Header -->
-    <section id="header">
-        <div class="header container">
-            <div class="nav-bar">
-                <div class="brand">
-                    <a href="#hero">
-                        <h1><span>C</span>PPROG <span>P</span>roject</h1>
-                    </a>
-                </div>
-                <div class="nav-list">
-                    <div class="hamburger">
-                        <div class="bar"></div>
-                    </div>
-                    <ul>
-                        <li><a href="#hero" data-after="Home">Home</a></li>
-                        <li><a href="#services" data-after="VIDEO">VIDEO</a></li>
-                        <li><a href="#projects" data-after="Projects">Images</a></li>
-                    </ul>
-                </div>
-            </div>
+  <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>C</span>PPROG <span>P</span>roject</h1>
+          </a>
         </div>
-    </section>
-    <!-- End Header -->
-
-    <!-- Hero Section  -->
-    <section id="hero">
-        <div class="hero container">
-            <div>
-                <h1>Music Video <span></span></h1>
-                <h1>BINALEWALA <span></span></h1>
-                <h1>CPPROG 03<span></span></h1>
-                <p style="color:white;">Members</p>
-                <!-- Members' information here -->
-            </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+          <ul>
+            <li><a href="#hero" data-after="Home">Home</a></li>
+            <li><a href="#services" data-after="VIDEO">VIDEO</a></li>
+            <li><a href="#projects" data-after="Projects">Images</a></li>
+          </ul>
         </div>
-    </section>
-    <!-- End Hero Section  -->
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
 
-    <section id="services">
-        <div class="services container">
-            <div class="service-top">
-                <h1 class="section-title">Music<span>V</span>ideo</h1>
-                <p>THE MAN FALLING INLOVE WITH A Girl Who Play ONLINE GAMES AFTER HE Lose in THE TOURNAMENT</p>
-            </div>
-            <div id="container">
-                <div id="video-container">
-                    <video id="karaoke-video" controls autoplay muted loop width="700" height="450">
-                        <source src="binalewala.mp4">
-                        <source src="binalewala.WebM">
-                    </video>
-                    <div id="karaoke-lyrics"></div>
-                </div>
-            </div>
+  <!-- Hero Section  -->
+  <section id="hero">
+    <div class="hero container">
+      <div>
+        <h1>Music Video <span></span></h1>
+        <h1>BINALEWALA <span></span></h1>
+        <h1>CPPROG 03<span></span></h1>
+        <p style="color:white;">Members</p>
+        <p style="color:white;">MATA JONES -EDITOR,DIRECTOR,CODER. &nbsp;&nbsp; Marquez Andrew -Cameraman,Coder </p>
+        <p style="color:white;">Reyes James -EDITOR &nbsp;&nbsp;&nbsp; Canlapan Jerico -DIRECTOR</p>
+        <p style="color:white;">Clent Mercolita-Highlights &nbsp;&nbsp;Custodio Eljohn -Lead Man </p>
+        <p style="color:white;">Laxamana Ashley-Second Man &nbsp;&nbsp;Flores Princess-Lead Girl</p>
+        <p style="color:white;">DOM RAVE CANACO /DAMAO CHRISJOHN -Script writer </p>
+        <p style="color:white;">Morcello Luis &nbsp;&nbsp;/NACARIO JOMAR ALDRIN-Editor </p>
+        <p style="color:white;">SIMOY PIOREY /DARO RALPH-Script Writer </p>
+        <p style="color:white;">BONDOC WARREN/ Gamas Christian -Editor </p>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section  -->
+
+  <section id="services">
+    <div class="services container">
+      <div class="service-top">
+        <h1 class="section-title">Music<span>V</span>ideo</h1>
+        <p>THE MAN FALLING IN LOVE WITH A Girl Who Play ONLINE GAMES AFTER HE Lose in THE TOURNAMENT</p>
+      </div>
+      <video controls autoplay muted loop width="700" height="450">
+        <source src="binalewala.mp4">
+        <source src="binalewala.WebM">
+      </video>
+    <div id="bottom-lyrics">
+        <div class="karaoke-line" data-duration="2000">Ikaw na pala</div>
+        <div class="karaoke-line" data-duration="10000">Ang may-ari ng damdamin ng minamahal ko</div>
+        <div class="karaoke-line" data-duration="4000">Pakisabi na lang</div>
+		<div class="karaoke-line" data-duration="10000">Na 'wag nang mag-alala at okay lang ako</div><br>
+		<div class="karaoke-line" data-duration="4000">Sabi nga ng iba</div>
+		<div class="karaoke-line" data-duration="7000">Kung talagang mahal mo siya ay hahayaan mo</div>
+		<div class="karaoke-line" data-duration="7000">Hahayaan mo na mamaalam</div>
+		<div class="karaoke-line" data-duration="10000">Hahayaan mo na lumisan,</div><br>
+		<div class="karaoke-line" data-duration="7000">Kaya't humihiling ako kay Bathala</div>
+		<div class="karaoke-line" data-duration="7000">Na sana ay hindi na siya luluha pa</div>
+		<div class="karaoke-line" data-duration="7000">Na sana ay hindi na siya mag-iisa</div>
+		<div class="karaoke-line" data-duration="5000">Na sana lang</div><br>
+		<div class="karaoke-line" data-duration="5000">Ingatan mo siya</div>
+		<div class="karaoke-line" data-duration="7000">Binalewala niya 'ko dahil sa 'yo</div>
+		<div class="karaoke-line" data-duration="7000">Nawalan na ng saysay ang pagmamahal </div>
+		<div class="karaoke-line" data-duration="6000">Na kay tagal ko ring binubuo</div>
+		<div class="karaoke-line" data-duration="7000">Na kay tagal ko ring hindi sinuko</div>
+		<div class="karaoke-line" data-duration="6000">Binalewala niya 'ko dahil sa 'yo</div>
+		<div class="karaoke-line" data-duration="4000">Dahil sa 'yo</div>
+		<div class="karaoke-line" data-duration="7000">Heto na'ng huling awit na kanyang maririnig</div>
+		<div class="karaoke-line" data-duration="7000">Heto na'ng huling tingin na dati siyang kinikilig</div>
+		<div class="karaoke-line" data-duration="7000">Heto na huling araw ng mga yakap ko't halik</div>
+		<div class="karaoke-line" data-duration="6000">Heto na, heto na</div><br>
+		<div class="karaoke-line" data-duration="4000">Sabi nga ng iba,</div>
+		<div class="karaoke-line" data-duration="7000">Kung talagang mahal mo siya ay hahayaan mo</div>
+		<div class="karaoke-line" data-duration="7000">Hahayaan mo na mamaalam</div>
+		<div class="karaoke-line" data-duration="10000">Hahayaan mo na lumisan</div><br>
+		<div class="karaoke-line" data-duration="4000">Ingatan mo siya</div>
+		<div class="karaoke-line" data-duration="1000">Binalewala niya 'ko dahil sa'yo</div>
+		<div class="karaoke-line" data-duration="7000">Nawalan na ng saysay ang pagmamahal</div>
+		<div class="karaoke-line" data-duration="6000">Na kay tagal ko ring binubuo </div>
+		<div class="karaoke-line" data-duration="6000">Na kay tagal ko ring hindi sinuko</div>
+		<div class="karaoke-line" data-duration="5000">Binalewala niya ako dahil sa'yo</div>
+		<div class="karaoke-line" data-duration="5000">Dahil sa 'yo</div><br>
+		<div class="karaoke-line" data-duration="5000">Heto na'ng huling awit na iyong maririnig</div>
+		<div class="karaoke-line" data-duration="5000">Heto na ang huling tingin na dati kang kinikilig</div>
+		<div class="karaoke-line" data-duration="5000">Heto na huling araw ng mga yakap ko't halik</div>
+		<div class="karaoke-line" data-duration="4000">Heto na, heto na</div>
+		<div class="karaoke-line" data-duration="600">Ingatan mo siya</div>
+
+		<script>
+			var lines = document.querySelectorAll('.karaoke-line');
+			var currentIndex = 0;
+			var timer;
+			var video = document.querySelector('video');
+			var lyricsStartTime = 13;
+			var isVideoPlaying = false;
+
+			function highlightNextLine() {
+				if (currentIndex < lines.length) {
+					lines[currentIndex].classList.add('active');
+					timer = setTimeout(function () {
+						lines[currentIndex].classList.remove('active');
+						currentIndex++;
+						highlightNextLine();
+                 	},   lines[currentIndex].dataset.duration);
+				}
+			}
+
+			function pauseLyrics() {
+				clearTimeout(timer);
+				isVideoPlaying = false;
+			}
+
+			function resumeLyrics() {
+				if (!isVideoPlaying) {
+					isVideoPlaying = true;
+					highlightNextLine();
+				}
+			}	
+
+			function seekToTime(timeInSeconds) {
+				pauseLyrics();
+				for (var i = 0; i < lines.length; i++) {
+					lines[i].classList.remove('active');
+			}
+
+				var totalTime = 0;
+				for (var i = 0; i < lines.length; i++) {
+					totalTime += parseInt(lines[i].dataset.duration);
+					if (totalTime >= (timeInSeconds - lyricsStartTime) * 1000) {
+						currentIndex = i;
+						break;
+					}
+				}	
+
+				if (isVideoPlaying) {
+					highlightNextLine();
+			    } else {
+					lines[currentIndex].classList.add('active');
+				}
+			}
+
+			video.addEventListener('timeupdate', function() {
+				var currentTime = Math.floor(video.currentTime);
+				seekToTime(currentTime);
+			});
+
+			video.addEventListener('play', function() {
+				resumeLyrics();
+			});
+
+			video.addEventListener('pause', function() {
+				pauseLyrics();
+			});
+
+			window.addEventListener('load', function() {
+				seekToTime(0);
+			});
+		</script>
+	</div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="projects container">
+      <div class="projects-header">
+        <h1 class="section-title">SCENE <span>Projects</span></h1>
+      </div>
+      <div class="all-projects">
+        <div class="project-item">
+          <div class="project-info">
+            <h1>SCENE 1</h1>
+            <h2>losing Tournament</h2>
+            <p>the boy lossing a championship tournament </p>
+          </div>
+          <div class="project-img">
+            <img src="./img/1.jpg" alt="img">
+          </div>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="projects container">
-            <div class="projects-header">
-                <h1 class="section-title">SCENE <span>Projects</span></h1>
-            </div>
-            <div class="all-projects">
-                <!-- Projects' information here -->
-            </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>SCENE 2</h1>
+            <h2>Meet Online Games</h2>
+            <p>The boy becomes happy because he meets a girl who there are same vides while playing online games</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/6.jpg" alt="img">
+          </div>
         </div>
-    </section>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>SCENE 3</h1>
+            <h2>Missing PART</h2>
+            <p>after their 20 Lose streak, the girl didn't reply to their chat and the boy wondered why she replied too long then the boy was so curious the boy stalked that girl's account and saw that the girl was so cold to them  </p>
+          </div>
+          <div class="project-img">
+            <img src="./img/3.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>SCENE 4</h1>
+            <h2>COLDEST PART</h2>
+            <p>the girl didn't reply to their chat after a month the boy stalked her  account again then the girl replied that she wanted to break up while stalking her account the boy found out that the girl had a meet-up place and the boy suddenly curious and she follows the girl  </p>
+          </div>
+          <div class="project-img">
+            <img src="./img/4.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>SCENE 5</h1>
+            <h2>SAD BOI PART</h2>
+            <p>after he followed the girl the boy was so shocked because he saw the girl that there was someone else and they met and the boy turned back down and got jealous and the boy said that I don't wanna rowing the relationship of yours. and the boy suddenly turned back.</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/2.jpg" alt="img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script>
-        // JavaScript code from the first section
-    </script>
-    <script>
-        // JavaScript code from the second section
-        // Lyrics data
-        const lyricsData = [
-            // Lyrics data here
-        ];
-
-        // Function to update lyrics
-        function updateLyrics(currentTime) {
-            const karaokeLyrics = document.getElementById('karaoke-lyrics');
-            karaokeLyrics.innerHTML = '';
-
-            lyricsData.forEach((line, index) => {
-                if (line.time <= currentTime && (lyricsData[index + 1] ? lyricsData[index + 1].time : Infinity) > currentTime) {
-                    const activeLine = document.createElement('span');
-                    activeLine.classList.add('karaoke-line', 'active');
-                    activeLine.textContent = line.text;
-                    karaokeLyrics.appendChild(activeLine);
-                } else {
-                    const inactiveLine = document.createElement('span');
-                    inactiveLine.classList.add('karaoke-line');
-                    inactiveLine.textContent = line.text;
-                    karaokeLyrics.appendChild(inactiveLine);
-                }
-            });
-        }
-
-        // Get video element
-        const video = document.getElementById('karaoke-video');
-
-        // Update lyrics display on video time update
-        video.addEventListener('timeupdate', function() {
-            updateLyrics(this.currentTime);
-        });
-    </script>
+  <script src="./app.js"></script>
 </body>
 
 </html>
+
